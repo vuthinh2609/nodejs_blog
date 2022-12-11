@@ -1,0 +1,26 @@
+{{#with course}}
+<div class="mt-4">
+    <h3>Sửa khóa học</h3>
+</div>
+<form method="post" action="/courses/update/{{this._id}}?_method=PUT" class="row g-3">  
+  <div class="col-12">
+    <label for="name" class="form-label">Tên khóa học</label>
+    <input type="text" class="form-control" id="name" name="name" value="{{this.name}}">
+  </div>  
+  <div class="col-md-12">
+    <label for="description" class="form-label">Description</label>
+    <textarea class="form-control" id="description" name="description" rows="5">{{this.description}}</textarea>
+  </div>  
+  <div class="col-md-12">
+    <label for="level" class="form-label">Trình độ</label>
+    <input type="text" class="form-control" id="level" name="level" value="{{this.level}}">
+  </div> 
+  <div class="col-12">
+    <label for="videoId" class="form-label">Video Id</label>
+    <input type="text" class="form-control" id="videoId" name="videoId" value="{{this.videoId}}">
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Sửa khóa học</button>
+  </div>
+</form>
+{{/with}}

@@ -1,29 +1,42 @@
-import express from 'express'
-import {engine} from 'express-handlebars'
-import morgan from 'morgan'
-import path from 'path'
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+const express = require('express');
+const handlebars = require('express-handlebars');
+const morgan = require('morgan');
+var methodOverride = require('method-override')
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const app = express()
-const port = 3000
+const route = require('./routes/index');
+const db = require('./config/db')
+
+//Connect Db
+db.connect()
+const app = express();
+const port = 3000;
+
+//Use Body Parse
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+//Use Method Override
+app.use(methodOverride('_method'))
 
 //Template Engine
-app.engine('.hbs', engine({extname: '.hbs'}))
-app.set('view engine', '.hbs')
-app.set('views', './src/resource/views')
+app.engine('.hbs', handlebars.engine({ 
+  extname: '.hbs',
+  helpers: {
+    sum:(a,b)=>a+b
+  }
+}));
+app.set('view engine', '.hbs');
+app.set('views', './src/resource/views');
 
 //Http Logger
-app.use(morgan('combined'))
+//app.use(morgan('combined'))
 //Use Static Files
-app.use(express.static(path.join(__dirname,'public')))
+app.use(express.static('src/public'));
 
-app.get('/', (req, res) => {
-  res.render('home')
-})
+//Route init
+route(app);
+
 
 app.listen(port, () => {
-  console.log(`Example app listening on port localhost:${port}`)
-})
+  console.log(`Example app listening on port localhost:${port}`);
+});

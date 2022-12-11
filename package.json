@@ -1,12 +1,12 @@
 {
-  "name": "blog",
+  "name": "course-practice-nodejs-express",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "src/app.js",
   "scripts": {
     "start": "nodemon --inspect src/app.js",
-    "watch":"sass --watch src/resource/scss:src/public/css",
+    "watch": "sass --watch src/resource/scss:src/public/css",
+    "beautiful": "prettier --single-quote --trailing-comma all --write src/**/*.{js,json,scss}",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,7 +15,7 @@
   },
   "keywords": [
     "nodejs",
-    "blog"
+    "express js"
   ],
   "author": "thinhvv",
   "license": "ISC",
@@ -23,12 +23,29 @@
     "url": "https://github.com/vuthinh2609/nodejs_blog/issues"
   },
   "homepage": "https://github.com/vuthinh2609/nodejs_blog#readme",
+  "lint-staged": {
+    "lint-staged": {
+      "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --write"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "dependencies": {
     "express": "^4.18.2",
-    "express-handlebars": "^6.0.6"
+    "express-handlebars": "^6.0.6",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.8.0",
+    "mongoose-slug-generator": "^1.0.4"
   },
   "devDependencies": {
+    "husky": "^8.0.2",
+    "lint-staged": "^13.1.0",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.1",
+    "sass": "^1.56.2"
   }
 }
