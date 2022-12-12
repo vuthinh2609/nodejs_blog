@@ -8,6 +8,9 @@ router.post('/create',courseController.create)
 
 router.get('/edit/:id',courseController.editForm)
 router.put('/update/:id',courseController.update)
+router.delete('/:id',courseController.delete)
+router.delete('/force/:id',courseController.forceDelete)
+router.patch('/restore/:id',courseController.restoreCourse)
 
 router.get('/:slug', courseController.details)
 

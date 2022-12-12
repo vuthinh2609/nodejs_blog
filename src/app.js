@@ -1,7 +1,8 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
 const morgan = require('morgan');
-var methodOverride = require('method-override')
+const methodOverride = require('method-override')
+
 
 const route = require('./routes/index');
 const db = require('./config/db')

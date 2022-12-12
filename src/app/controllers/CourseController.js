@@ -37,9 +37,31 @@ class CourseController {
   //[PUT] courses/update/:id
   update(req,res,next){
     Course.updateOne({_id: req.params.id},req.body)
-    .then(course=>{res.redirect('/me/stored/courses')})
+    .then(()=>{res.redirect('/me/stored/courses')})
     .catch(next)
   }
+
+  //[Delete] Course/delete/:id
+  delete(req,res,next){
+    Course.delete({_id: req.params.id})
+      .then(()=>{res.redirect('back')})
+      .catch(next)
+  }
+
+  //[Delete] Course/force/:id
+  forceDelete(req,res,next){
+    Course.remove({_id: req.params.id})
+      .then(()=>{res.redirect('back')})
+      .catch(next)
+  }
+
+  //[Patch] Course/restore/:id
+  restoreCourse(req,res,next){
+    Course.restore({_id: req.params.id})
+      .then(()=>{res.redirect('back')})
+      .catch(next)
+  }
+
 }
 
 module.exports = new CourseController();
